@@ -12,8 +12,9 @@ nav a:hover, .text-link:hover, .back-top:hover { color: var(--green); }
 .eyebrow { font-size: 10px; font-weight: 750; letter-spacing: 1.7px; display: flex; align-items: center; gap: 9px; margin: 0 0 28px; }
 .status-dot { display: inline-block; width: 7px; height: 7px; flex-shrink: 0; border-radius: 50%; background: var(--green); }
 h1 { font-size: clamp(36px, 4.1vw, 57px); line-height: 1.32; letter-spacing: -3px; font-weight: 800; margin: 0 0 27px; }
+.hero h1 { font-size: clamp(32px, 2.8vw, 38px); letter-spacing: -1.7px; }
 .underlined { position: relative; white-space: nowrap; }
-.underlined::after { content: ''; position: absolute; height: 10px; background: #c8df9a; bottom: 2px; left: 0; right: 0; z-index: -1; transform: rotate(-2deg); }
+.underlined::after { content: ''; position: absolute; height: 10px; background: #cfe5f7; bottom: 2px; left: 0; right: 0; z-index: -1; transform: rotate(-2deg); }
 .hero-copy { isolation: isolate; }
 .hero-description { color: var(--muted); font-size: 15px; line-height: 1.95; margin: 0; letter-spacing: -.4px; }
 .hero-actions { display: flex; gap: 25px; align-items: center; flex-wrap: wrap; margin-top: 32px; }
@@ -23,6 +24,17 @@ h1 { font-size: clamp(36px, 4.1vw, 57px); line-height: 1.32; letter-spacing: -3p
 .text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 650; }
 .hero-note { display: flex; align-items: center; gap: 8px; margin: 37px 0 0; font-size: 11px; color: var(--muted); }
 .hero-note span { color: var(--green); font-size: 18px; }
+.profile-visual { position: relative; display: grid; min-height: 390px; place-items: center; isolation: isolate; }
+.profile-visual-ring { position: absolute; width: min(82%, 350px); aspect-ratio: 1; border: 1px solid #c8dced; border-radius: 50%; }
+.profile-visual-ring::before, .profile-visual-ring::after { content: ''; position: absolute; border: 1px solid #dce9f4; border-radius: 50%; }
+.profile-visual-ring::before { inset: 18px; }
+.profile-visual-ring::after { inset: 37px; }
+.profile-visual-card { position: relative; display: flex; width: min(76%, 310px); min-height: 260px; flex-direction: column; align-items: flex-start; justify-content: center; padding: 32px; border: 1px solid #d5e3ef; border-radius: 8px; background: #fff; box-shadow: 12px 14px 0 #e7f1f9; transform: rotate(-3deg); }
+.profile-visual-label { color: var(--green); font-size: 9px; font-weight: 750; letter-spacing: 1.8px; }
+.profile-visual-name { margin-top: 20px; color: #183d5e; font-size: 70px; font-weight: 850; letter-spacing: -5px; line-height: 1; }
+.profile-visual-line { width: 48px; height: 4px; margin-top: 21px; border-radius: 4px; background: #5595c9; }
+.profile-visual-caption { margin-top: 14px; color: var(--muted); font-size: 12px; letter-spacing: .3px; }
+.profile-visual-mark { position: absolute; right: 4%; bottom: 3%; color: #dbeaf6; font-family: serif; font-size: 76px; font-weight: 700; line-height: 1; }
 .hero-art { position: relative; height: 426px; margin-left: 15px; }
 .art-grid { position: absolute; inset: 15px 0 26px 25px; background-color: #e4e9dc; background-image: linear-gradient(#cdd6c766 1px, transparent 1px), linear-gradient(90deg, #cdd6c766 1px, transparent 1px); background-size: 28px 28px; border-radius: 48% 48% 13% 13%; transform: rotate(5deg); }
 .art-orbit { position: absolute; width: 95%; height: 70%; border: 1px solid #abb8a6; border-radius: 50%; transform: rotate(-28deg); top: 60px; left: -4px; }
@@ -129,7 +141,7 @@ h2 > span { color: var(--green); }
 .site-footer .wordmark { font-size: 18px; }
 .site-footer p { font-size: 11px; color: var(--muted); }
 .back-top { font-size: 11px; display: flex; gap: 15px; border: 0; padding: 8px 0; background: transparent; color: inherit; cursor: pointer; }
-.work-invitation { background: #f0f1eb; border-top: 1px solid var(--line); padding-block: 60px; }
+.work-invitation { background: #f2f7fb; border-top: 1px solid var(--line); padding-block: 60px; }
 .work-invitation-inner { display: flex; justify-content: space-between; align-items: center; gap: 28px; }
 .work-invitation .eyebrow { color: var(--green); margin-bottom: 15px; }
 .work-invitation .button { flex-shrink: 0; }
@@ -137,6 +149,26 @@ h2 > span { color: var(--green); }
 .portfolio-page { min-height: calc(100vh - 202px); border-top: 0; padding-top: 42px; }
 .list-back { margin-bottom: 48px; color: var(--muted); }
 .about-more { margin-top: 23px; color: var(--green); }
+.profile-section { padding-block: 36px 94px; scroll-margin-top: 110px; }
+.profile-section-heading { max-width: 650px; margin: 0 auto 38px; text-align: center; }
+.profile-section-heading .eyebrow { justify-content: center; margin-bottom: 14px; color: var(--green); }
+.profile-section-heading h2 { font-size: clamp(30px, 3.2vw, 42px); }
+.profile-section-heading h2 > span { color: var(--green); }
+.profile-section-heading > p:last-child { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+.profile-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.profile-info-card { position: relative; min-height: 214px; padding: 28px 30px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.profile-info-card .eyebrow { margin-bottom: 14px; color: var(--green); font-size: 9px; letter-spacing: 1.4px; }
+.profile-info-card h3 { margin: 0; font-size: 22px; letter-spacing: -.7px; }
+.profile-info-card > p:not(.eyebrow) { max-width: 380px; margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.85; word-break: keep-all; }
+.profile-card-number { position: absolute; top: 22px; right: 24px; color: #b7cde0; font-size: 11px; font-weight: 750; }
+.profile-tags { display: flex; gap: 9px; margin-top: 21px; }
+.profile-tags span { padding: 8px 17px; border: 1px solid #d7e6f2; border-radius: 24px; background: #f3f8fc; color: #24577f; font-size: 13px; font-weight: 650; }
+.profile-learning { background: #f5f9fc; }
+.profile-activities { min-height: 260px; }
+.activity-placeholder { display: grid; min-height: 76px; margin-top: 18px; place-items: center; border: 1px dashed #b9cee0; border-radius: 5px; background: #f8fbfd; color: #72879a; font-size: 11px; line-height: 1.7; text-align: center; }
+.profile-goal { display: flex; flex-direction: column; justify-content: center; background: #eaf3fa; }
+.profile-goal .goal-text { color: #174e7a !important; font-size: clamp(27px, 3vw, 38px) !important; font-weight: 800; letter-spacing: -1px; }
+.goal-text span { color: #5595c9; }
 .about-page { padding-block: 42px 80px; min-height: calc(100vh - 202px); }
 .about-page-heading { padding-bottom: 36px; border-bottom: 1px solid var(--line); }
 .about-page-heading .eyebrow { color: var(--green); margin-bottom: 18px; }
@@ -164,7 +196,7 @@ nav a[aria-current='page'] { color: var(--green); text-decoration: underline; te
   .page-width, .header-inner { width: calc(100% - 56px); }
   .hero { gap: 10px; padding-block: 65px; }
   h1 { letter-spacing: -2px; }
-  .hero-art { transform: scale(.88); transform-origin: center right; margin-left: -20px; }
+  .profile-visual { min-height: 340px; }
   .eyebrow { font-size: 8px; letter-spacing: 1px; }
   .hero-description { font-size: 13px; }
   .hero-actions { gap: 18px; }
@@ -191,6 +223,10 @@ nav a[aria-current='page'] { color: var(--green); text-decoration: underline; te
   .hero-actions { margin-top: 25px; gap: 22px; }
   .hero-note { margin-top: 26px; font-size: 10px; }
   .hero-art { transform: none; height: 390px; width: min(410px, calc(100% - 14px)); margin: 0 auto; }
+  .profile-visual { min-height: 300px; margin-top: -12px; }
+  .profile-visual-ring { width: min(80%, 280px); }
+  .profile-visual-card { width: min(76%, 270px); min-height: 220px; padding: 25px; }
+  .profile-visual-name { font-size: 60px; }
   .project-window { right: 22px; left: 6px; }
   .window-title { font-size: 28px; }
   .window-scene { height: 89px; }
@@ -199,6 +235,14 @@ nav a[aria-current='page'] { color: var(--green); text-decoration: underline; te
   .idea-note { width: 153px; right: -3px; bottom: 20px; }
   .art-caption { font-size: 8px; left: 12px; bottom: 0; }
   .about-section { grid-template-columns: 1fr; gap: 30px; padding-block: 58px; }
+  .profile-section { padding-block: 22px 60px; scroll-margin-top: 92px; }
+  .profile-section-heading { margin-bottom: 27px; text-align: left; }
+  .profile-section-heading .eyebrow { justify-content: flex-start; }
+  .profile-section-heading > p:last-child { font-size: 12px; }
+  .profile-card-grid { grid-template-columns: 1fr; gap: 12px; }
+  .profile-info-card { min-height: 190px; padding: 24px; }
+  .profile-activities { min-height: 245px; }
+  .profile-goal { min-height: 190px; }
   .section-heading h2 br { display: none; }
   h2 { font-size: 28px; letter-spacing: -1.3px; }
   .about-content h3 { font-size: 22px; }

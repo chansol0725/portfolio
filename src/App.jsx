@@ -55,12 +55,13 @@ function App() {
   useEffect(() => {
     document.title = isProjectPage ? `${selectedProject?.title ?? '프로젝트를 찾을 수 없어요'} | 나의 포트폴리오` : isPortfolioPage ? '포트폴리오 목록 | 나의 포트폴리오' : isAboutPage ? '자기소개 | 나의 포트폴리오' : '나의 포트폴리오'
 
-    if (isPortfolioPage || isAboutPage || isProjectPage) {
+    if (isPortfolioPage || isProjectPage) {
       window.scrollTo({ top: 0, behavior: 'instant' })
-      document.getElementById(isProjectPage ? 'project-title' : isPortfolioPage ? 'portfolio-title' : 'about-page-title')?.focus({ preventScroll: true })
+      document.getElementById(isProjectPage ? 'project-title' : 'portfolio-title')?.focus({ preventScroll: true })
     } else {
-      const targetId = currentLocation.slice(1) || 'home'
+      const targetId = isAboutPage ? 'about' : currentLocation.slice(1) || 'home'
       document.getElementById(targetId)?.scrollIntoView({ block: 'start' })
+      if (isAboutPage) document.getElementById('about-title')?.focus({ preventScroll: true })
     }
   }, [currentLocation, isPortfolioPage, isAboutPage, isProjectPage, selectedProject])
 
@@ -73,80 +74,76 @@ function App() {
             <span className="brand-symbol" aria-hidden="true">✳</span> my portfolio<span className="brand-dot">.</span>
           </a>
           <nav aria-label="주요 메뉴">
-            <a href="#/about" aria-current={isAboutPage ? 'page' : undefined}>자기소개</a>
+            <a href="#about" aria-current={isAboutPage ? 'location' : undefined}>자기소개</a>
             <a href="#/portfolio" aria-current={isPortfolioPage || isProjectPage ? 'page' : undefined}>포트폴리오 <span aria-hidden="true">↗</span></a>
           </nav>
         </div>
       </header>
       <main id="main" tabIndex={-1}>
-        {!isPortfolioPage && !isAboutPage && !isProjectPage && <>
+        {!isPortfolioPage && !isProjectPage && <>
         <section className="hero page-width" id="home" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow"><span className="status-dot" /> A LITTLE ABOUT ME, A LOT TO EXPLORE</p>
-            <h1 id="hero-title">작은 호기심이,<br />나만의 <span className="underlined">결과물로.</span></h1>
-            <p className="hero-description">배우고, 시도하고, 만들어 가는 중입니다.<br />나의 관심사와 도전이 쌓이는 이곳에 오신 걸 환영해요.</p>
+            <p className="eyebrow"><span className="status-dot" /> 안녕하세요, 저는 찬솔입니다</p>
+            <h1 id="hero-title">농구와 유도를 좋아하고<br /><span className="underlined">꾸준히 도전하는 찬솔</span></h1>
+            <p className="hero-description">제가 좋아하는 것과 잘하는 점,<br />앞으로 이루고 싶은 목표를 소개합니다.</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#/portfolio">포트폴리오 보기 <span aria-hidden="true">↗</span></a>
-              <a className="text-link" href="#/about">어떤 사람인가요? <span aria-hidden="true">→</span></a>
+              <a className="button button-primary" href="#about">소개 더 보기 <span aria-hidden="true">↓</span></a>
+              <a className="text-link" href="#/portfolio">작품 둘러보기 <span aria-hidden="true">→</span></a>
             </div>
-            <p className="hero-note"><span aria-hidden="true">✳</span> 완벽하지 않아도 괜찮아. 일단 시작해 보기!</p>
+            <p className="hero-note"><span aria-hidden="true">✳</span> 꾸준히 노력하며 한 걸음씩 나아가요.</p>
           </div>
-          <div className="hero-art" aria-hidden="true">
-            <div className="art-grid" /><div className="art-orbit" /><span className="art-spark">✳</span>
-            <div className="floating-label"><span className="status-dot" /> 계속 성장하는 중</div>
-            <div className="project-window">
-              <div className="window-bar"><span /><span /><span /><p>my-portfolio</p><span className="window-expand">↗</span></div>
-              <div className="window-content">
-                <span className="window-kicker">HELLO, WORLD!</span>
-                <p className="window-title">나다운 것을<br />만들어 가는 일<span>.</span></p>
-                <div className="window-scene"><div className="scene-circle" /><div className="scene-stairs"><i /><i /><i /></div><span>↗</span></div>
-                <div className="window-footer"><span>CURIOUS MIND, CREATIVE HANDS</span><span>01 / ∞</span></div>
-              </div>
+          <div className="profile-visual" aria-hidden="true">
+            <div className="profile-visual-ring" />
+            <div className="profile-visual-card">
+              <span className="profile-visual-label">나를 소개해요</span>
+              <span className="profile-visual-name">찬솔</span>
+              <span className="profile-visual-line" />
+              <span className="profile-visual-caption">농구 · 유도 · 꾸준함</span>
             </div>
-            <div className="idea-note"><span>NOTE TO SELF</span><p>오늘의 시도가<br />내일의 나를 만든다.</p><span className="note-arrow">⤴</span></div>
-            <div className="art-caption">IDEA <span>→</span> MAKE <span>→</span> GROW</div>
+            <span className="profile-visual-mark">柔</span>
           </div>
         </section>
-        <div className="section-divider page-width"><span>SCROLL TO EXPLORE</span><span aria-hidden="true">↓</span></div>
-        <section className="about-section page-width" id="about" aria-labelledby="about-title">
-          <div className="section-heading"><p className="eyebrow">01 / ABOUT ME</p><h2 id="about-title">안녕하세요,<br />이런 사람입니다<span>.</span></h2></div>
-          <div className="about-content">
-            <span className="example-label">자기소개를 채워 보세요</span>
-            <h3>나를 가장 잘 설명하는<br />한 문장은 무엇인가요?</h3>
-            <p>좋아하는 것, 요즘 배우는 것, 앞으로 해 보고 싶은 일을 소개해 주세요. 거창한 경험보다 나만의 관심사와 생각이 좋은 시작이 됩니다.</p>
-            <div className="interest-tags"><span># 나의 관심사</span><span># 배우는 중</span><span># 다음 도전</span></div>
-            <a className="text-link about-more" href="#/about">자기소개 보기 <span aria-hidden="true">→</span></a>
+        <section className="profile-section page-width" id="about" aria-labelledby="about-title">
+          <div className="profile-section-heading">
+            <p className="eyebrow">01 / 찬솔 소개</p>
+            <h2 id="about-title" tabIndex={-1}>찬솔을 소개합니다<span>.</span></h2>
+            <p>좋아하는 것부터 앞으로의 목표까지, 저에 대해 소개할게요.</p>
+          </div>
+          <div className="profile-card-grid">
+            <article className="profile-info-card profile-interests" id="interests">
+              <span className="profile-card-number">01</span>
+              <p className="eyebrow">관심사</p>
+              <h3>좋아하는 것</h3>
+              <div className="profile-tags"><span>농구</span><span>유도</span></div>
+            </article>
+            <article className="profile-info-card profile-learning" id="strengths">
+              <span className="profile-card-number">02</span>
+              <p className="eyebrow">강점과 배움</p>
+              <h3>꾸준히, 하나씩</h3>
+              <p>꾸준히 하는 것이 제가 잘하는 점이에요. 유도 기술을 더 배우고 싶어요.</p>
+            </article>
+            <article className="profile-info-card profile-activities" id="activities">
+              <span className="profile-card-number">03</span>
+              <p className="eyebrow">활동과 작품</p>
+              <h3>활동과 작품</h3>
+              <p>소개할 활동이나 작품을 나중에 이곳에 추가할게요.</p>
+              <div className="activity-placeholder" aria-label="나중에 사진이나 작품을 추가할 수 있는 공간">사진이나 작품을<br />나중에 추가해요</div>
+            </article>
+            <article className="profile-info-card profile-goal" id="goals">
+              <span className="profile-card-number">04</span>
+              <p className="eyebrow">목표</p>
+              <h3>앞으로의 목표</h3>
+              <p className="goal-text">금메달 따기<span aria-hidden="true">!</span></p>
+            </article>
           </div>
         </section>
         <section className="work-invitation">
           <div className="page-width work-invitation-inner">
-            <div><p className="eyebrow">EXPLORE MY WORK</p><h2>어떤 것들을 만들었을까요<span>?</span></h2><p className="invitation-description">생각을 결과물로 옮겨 본 이야기를 만나 보세요.</p></div>
-            <a className="button button-primary" href="#/portfolio">포트폴리오 목록 보기 <span aria-hidden="true">↗</span></a>
+            <div><p className="eyebrow">포트폴리오</p><h2>작품도 함께 볼까요<span>?</span></h2><p className="invitation-description">프로젝트 모음은 준비되면 하나씩 소개할게요.</p></div>
+            <a className="button button-primary" href="#/portfolio">포트폴리오 보기 <span aria-hidden="true">↗</span></a>
           </div>
         </section>
         </>}
-        {isAboutPage && <section className="about-page page-width" aria-labelledby="about-page-title">
-          <a className="text-link list-back" href="#home"><span aria-hidden="true">←</span> 홈으로 돌아가기</a>
-          <div className="about-page-heading">
-            <p className="eyebrow">MY STORY / ABOUT ME</p>
-            <h1 id="about-page-title" tabIndex={-1}>자기소개<span>.</span></h1>
-            <p className="list-description">좋아하는 것과 배우는 것, 그리고 앞으로의 나에 대한 이야기.</p>
-          </div>
-          <div className="about-profile">
-            <div className="about-profile-art" aria-hidden="true"><span>✳</span><p>STILL LEARNING,<br />ALWAYS GROWING.</p><div>나만의 속도로,<br />나만의 방향으로.</div></div>
-            <div className="about-content">
-              <span className="example-label">나의 이야기로 채워 보세요</span>
-              <h2>안녕하세요,<br />이런 사람입니다<span>.</span></h2>
-              <p>나를 가장 잘 설명하는 한 문장으로 시작해 보세요. 좋아하는 것, 요즘 배우는 것, 앞으로 해 보고 싶은 일을 자신만의 이야기로 소개해 주세요.</p>
-              <dl className="about-details">
-                <div><dt>관심 있는 것</dt><dd>시간 가는 줄 모르고 빠져드는 주제나 취미를 적어 주세요.</dd></div>
-                <div><dt>요즘 배우는 것</dt><dd>새롭게 배우고 있거나 도전하고 있는 것을 소개해 주세요.</dd></div>
-                <div><dt>앞으로의 목표</dt><dd>만들어 보고 싶은 것, 이루고 싶은 작은 목표를 적어 주세요.</dd></div>
-              </dl>
-              <a className="button button-primary" href="#/portfolio">포트폴리오 보기 <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-        </section>}
         {isPortfolioPage && <section className="portfolio-section portfolio-page" aria-labelledby="portfolio-title">
           <div className="page-width">
             <a className="text-link list-back" href="#home"><span aria-hidden="true">←</span> 홈으로 돌아가기</a>
